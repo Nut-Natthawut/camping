@@ -1,6 +1,7 @@
 "use client"
 
 import { DarkMode } from "./darkMode"
+import DropdownListMenu from "./DropdownListMenu"
 import Logo from "./Logo"
 import Search from "./Search"
 
@@ -16,7 +17,7 @@ const Navbar = () => {
             {/* Darkmode & profile */}
             <div className="flex gap-4">
                 <DarkMode />
-                <h1>Profile</h1> 
+                <DropdownListMenu />
             </div>
            
         </div>
