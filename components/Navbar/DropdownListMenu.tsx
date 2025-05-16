@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { links } from "@/utils/links";
+import SignOutLinks from "./SignOutLinks";
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 
 const DropdownListMenu = () => {
   return (
@@ -27,13 +29,36 @@ const DropdownListMenu = () => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
 
-          {links.map((item, index) => {
-            return (
-              <DropdownMenuItem key={index}>
-                <Link href={item.href}>{item.label}</Link>
-              </DropdownMenuItem>
-            );
-          })}
+          {/* ล็อคเอ้าแล้ว */}
+          <SignedOut>
+            <DropdownMenuItem>
+              <SignInButton mode="modal">
+                <button>Login</button>
+              </SignInButton>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem>
+              <SignUpButton mode="modal">
+                <button>Register</button>
+              </SignUpButton>
+            </DropdownMenuItem>
+          </SignedOut>
+
+          {/* ล็อคอินแล้ว */}
+          <SignedIn>
+            {links.map((item, index) => {
+              return (
+                <DropdownMenuItem key={index}>
+                  <Link href={item.href}>{item.label}</Link>
+                </DropdownMenuItem>
+              );
+            })}
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <SignOutLinks />
+            </DropdownMenuItem>
+            
+          </SignedIn>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
