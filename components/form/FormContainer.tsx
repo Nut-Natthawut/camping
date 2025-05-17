@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useActionState } from "react";
 import { useToast } from "@/hooks/use-toast";
