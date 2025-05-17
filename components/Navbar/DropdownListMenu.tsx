@@ -14,13 +14,13 @@ import Link from "next/link";
 import { links } from "@/utils/links";
 import SignOutLinks from "./SignOutLinks";
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
-
+// edit-error-next suppressHydrationWarning
 const DropdownListMenu = () => {
   return (
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant={"outline"}>
+          <Button variant={"outline"} suppressHydrationWarning>
             <AlignLeft />
             <Usericon />
           </Button>
@@ -33,13 +33,13 @@ const DropdownListMenu = () => {
           <SignedOut>
             <DropdownMenuItem>
               <SignInButton mode="modal">
-                <button>Login</button>
+                <button suppressHydrationWarning>Login</button>
               </SignInButton>
             </DropdownMenuItem>
 
             <DropdownMenuItem>
               <SignUpButton mode="modal">
-                <button>Register</button>
+                <button suppressHydrationWarning>Register</button>
               </SignUpButton>
             </DropdownMenuItem>
           </SignedOut>
