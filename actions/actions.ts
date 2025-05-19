@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
-import { profileSchema, validateWithZod } from "@/utils/schemas";
+import { imageSchema, landmarkSchema, profileSchema, validateWithZod } from "@/utils/schemas";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import db from "@/utils/db";
 import { redirect } from "next/navigation";
+import { uploadFile } from "@/utils/supabase";
+
 
 const getAuthUser = async () => {
   const user = await currentUser();
@@ -26,12 +28,10 @@ export const createProfileAction = async (
   formData: FormData
 ) => {
   try {
-    const user = await currentUser();
-    if (!user) throw new Error("Please Login");
-    // validate error
+    const user = await getAuthUser();
+    
     const rawData = Object.fromEntries(formData);
     const validateField = validateWithZod(profileSchema, rawData);
-    // console.log('validated',validateField)
 
     await db.profile.create({
       data: {
@@ -63,19 +63,49 @@ export const createLandmarkAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   try {
-    const user = await currentUser();
-    if (!user) throw new Error("Please Login");
+    const user = await getAuthUser();
     // validate error
     const rawData = Object.fromEntries(formData);
-    // const validateField = validateWithZod(profileSchema, rawData);
-    console.log('validated',rawData)
+    const file = formData.get("image") as File
 
+    //step1 ValidateData
+    const validatedFile = validateWithZod(imageSchema, { image: file });
+    const validateField = validateWithZod(landmarkSchema, rawData);
     
+    //step2 Upload Image to supabase
+    const fullpath = await uploadFile(validatedFile.image)
+    console.log(fullpath)
 
-    return { message: "Create Landmark Success!!!" };
+
+
+    //step3 Insert to DB
+    await db.landmark.create({
+      data:{
+        ...validateField,
+        image: fullpath,
+        profileId: user.id,
+      }
+    })
+
+    // return { message: "Create Landmark Success!!!" };
   } catch (error) {
     // console.log(error)
     return renderError(error);
   }
-  // redirect("/");
+  redirect("/");
 };
+
+//fetch landmark
+export const fetchLandmarks = async (
+  // search 
+  
+) => {
+  
+  const landmarks = await db.landmark.findMany({
+    orderBy:{
+      createdAt:'desc'
+    }
+  })
+
+  return landmarks
+}

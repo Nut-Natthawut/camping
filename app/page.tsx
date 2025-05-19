@@ -1,11 +1,12 @@
 //rafce
+import LandmarkContainer from "@/components/home/LandmarkContainer"
 import { Button } from "@/components/ui/button"
 const page = () => {
+  //Search 
+
   return (
     <>
-    <div>page</div>
-    <div>Hello</div>
-    <Button variant='outline' size='lg'>Button</Button>
+     <LandmarkContainer />
     </>
   )
 }

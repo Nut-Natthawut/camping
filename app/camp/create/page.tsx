@@ -4,8 +4,10 @@ import { SubmitButton } from "@/components/form/Buttons";
 import CategoryInput from "@/components/form/CategoryInput";
 import FormContainer from "@/components/form/FormContainer";
 import FormInput from "@/components/form/Forminput";
+import ImageInput from "@/components/form/ImageInput";
 import ProviceInput from "@/components/form/ProvinceInput";
 import TextAreaInput from "@/components/form/TextAreaInput";
+import MapLandmark from "@/components/map/MapLandmark";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -37,7 +39,8 @@ const CreateProfile = async () => {
 
              <ProviceInput />
           </div>
-         
+          <ImageInput />
+         <MapLandmark />
 
           <SubmitButton className="mt-4" size="lg" text="Create Landmark" />
         </FormContainer>
