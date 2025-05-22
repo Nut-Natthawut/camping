@@ -4,6 +4,12 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Providers from "./Providers";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Itim } from 'next/font/google';
+
+const itim = Itim({
+  weight: "400",
+  subsets: ["latin"],
+})
 
 
 const geistSans = localFont({
@@ -30,7 +36,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <body className={`${itim.className} antialiased`}>
           <Providers>
             <Navbar />
 

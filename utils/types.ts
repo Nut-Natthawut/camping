@@ -14,4 +14,5 @@ export type LandmarkCardProps = {
   province: string;
   lat: number;
   lng: number;
+  image: string;
 }
