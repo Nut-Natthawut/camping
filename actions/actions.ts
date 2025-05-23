@@ -99,10 +99,16 @@ export const createLandmarkAction = async (
 //fetch landmark
 export const fetchLandmarks = async (
   // search 
-  
-) => {
+  {search = "",category}: {search?: string,category?: string}) => {
   
   const landmarks = await db.landmark.findMany({
+    where:{
+      category,
+      OR:[
+        {name : {contains: search, mode: "insensitive"}},
+        {description : {contains: search, mode: "insensitive"}}
+      ]
+    },
     orderBy:{
       createdAt:'desc'
     }
