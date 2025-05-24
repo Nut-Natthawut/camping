@@ -1,8 +1,8 @@
-import LoadingCart from "@/components/card/LoadingCart"
+import LoadingCard from "@/components/card/LoadingCard"
 
 const loading = () => {
   return (
-    <LoadingCart />
+    <LoadingCard />
   )
 }
 export default loading

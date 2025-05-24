@@ -116,6 +116,19 @@ export const fetchLandmarks = async (
 
   return landmarks
 }
+export const fetchLandmarksHero = async () => {
+  // search 
+
+  const landmarks = await db.landmark.findMany({
+   
+    orderBy:{
+      createdAt:'desc'
+    },
+    take:5
+  });
+
+  return landmarks;
+}
 //fetchFavoriteId
 export const fetchFavoriteId = async ({landmarkId}: {landmarkId: string}) => {
     const user = await getAuthUser();

@@ -1,5 +1,5 @@
 //rafce
-import LoadingCart from "@/components/card/LoadingCart";
+import LoadingCard from "@/components/card/LoadingCard";
 import LandmarkContainer from "@/components/home/LandmarkContainer";
 import { Suspense } from "react";
 
@@ -9,7 +9,7 @@ const page = async({searchParams} :
   const {search,category} = await searchParams
   return (
     <section>
-      <Suspense fallback={<LoadingCart />}>
+      <Suspense fallback={<LoadingCard />}>
         <LandmarkContainer search={search} category={category}/>
       </Suspense>
     </section>
